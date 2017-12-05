@@ -44,3 +44,30 @@ print(zippedLists)
 zippedLists2 = [list(i) for i in zip(lab_1,lab_2,lab_3,easter_test,christmas_test,part_time,exam_grades)]
 unzippedLists = [list(i) for i in zip(*zippedLists2)]
 #Functions
+def dot(v, w):
+    return sum(v_i * w_i for v_i, w_i in zip(v, w))
+	
+def sum_of_squares1(v):
+    return dot(v, v)
+
+def mean(x):
+    return sum(x) / len(x)
+	
+def de_mean(x):
+    return [x_i - mean(x) for x_i in x]
+	
+def variance(x):
+    return sum_of_squares1(de_mean(x)) / (len(x) - 1)
+
+def standard_deviation(x):
+    return math.sqrt(variance(x))
+
+def covariance(x, y):
+    return dot(de_mean(x), de_mean(y)) / (len(x) - 1)
+
+def correlation(x, y):
+    if standard_deviation(x) > 0 and standard_deviation(y) > 0:
+        return covariance(x, y) / standard_deviation(x) / standard_deviation(y)
+    else:
+        return 0
+print("")
