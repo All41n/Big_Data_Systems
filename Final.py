@@ -145,3 +145,27 @@ def coefficient(x,y):
 	b1 = covariance(x,y)/ variance(x)
 	b0 = mean(y) - b1 * mean(x)
 	return b1,b0
+    
+easter_x, exam_x = least_squares_fit(easter_test,exam_grades)
+print("\t\t\tEaster_X: ",easter_x)	
+print("\t\t\tExam_X: ",exam_x)
+print("\t\t\tr-squared:", r_squared(easter_x, exam_x, easter_test, exam_grades))
+print("\t\t\tBest Line Fit(y = m* x + c):", coefficient(easter_test,exam_grades))
+
+plt.figure
+plt.scatter(easter_test,exam_grades, color = 'k', alpha = 0.5)
+plt.plot([easter_test,exam_grades],[easter_test,exam_grades],'k-', color = 'r')
+plt.xlabel("Easter Test")
+plt.ylabel("Exam Grades")
+plt.title("Simple Linear")
+plt.show()
+
+plt.figure
+plt.scatter(christmas_test,easter_test, color = 'k', alpha = 0.5)
+plt.plot([christmas_test,easter_test],[christmas_test,easter_test],'k-', color = 'r')
+plt.xlabel("Christmas Test")
+plt.ylabel("Easter Grades")
+plt.title("Simple Linear")
+plt.show()
+print("___________________________________________________________________________________________________________")
+print("________________________________Multiple Linear Regression of eater and exam sets__________________________")
