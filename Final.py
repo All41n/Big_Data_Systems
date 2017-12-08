@@ -169,3 +169,22 @@ plt.title("Simple Linear")
 plt.show()
 print("___________________________________________________________________________________________________________")
 print("________________________________Multiple Linear Regression of eater and exam sets__________________________")
+def sum_of_squares(y):
+	return sum([y_i**2 for y_i in y])
+
+def partial_difference_quotient_s(f,v,i,x,y,h):
+    w = [v_j +(h if j == i else 0) for j,v_j in enumerate(v)]
+    return (f(w,x,y) - f(v,x,y))/h
+	
+def estimate_gradient_s(f,v,x,y,h =0.001):
+    return [partial_difference_quotient_s(f,v,i,x,y,h) for i, _ in enumerate(v)]
+	
+def step(v,direction,step_size):
+    return [v_i - step_size * direction_i for v_i,direction_i in zip(v,direction)]
+
+def predict_y(x_i, beta):
+	return numpy.dot(x_i, beta)
+	
+def error(v,x,y):
+	error = y-predict_y(v,x)
+	return error
