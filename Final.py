@@ -204,3 +204,19 @@ def p_value(beta_hat_j, sigma_hat_j):
         return 2 * (1 - normal_cdf(beta_hat_j / sigma_hat_j))
     else:
         return 2 * normal_cdf(beta_hat_j / sigma_hat_j)
+
+def bootstrap_sample(data):
+    list_data=list(data)
+    rand_data=[random.choice(list_data) for _ in list_data]
+    return rand_data
+	
+def bootstrap_statistic(x_data,y_data, stats_fn, num_samples):
+    stats=[]
+    for i in range(num_samples):
+        New_sample=bootstrap_sample(zip(x_data,y_data))
+        x_sample,y_sample= zip(*New_sample)
+        x=list(x_sample);
+        y=list(y_sample)
+        stat = stats_fn(x,y)
+        stats.append(stat)
+    return stats
