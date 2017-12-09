@@ -220,3 +220,29 @@ def bootstrap_statistic(x_data,y_data, stats_fn, num_samples):
         stat = stats_fn(x,y)
         stats.append(stat)
     return stats
+    
+def stochastic_descent(x,y,f =squared_error):
+    random.seed(0)
+    v = [random.randint(-10,10) for x in x[0]]
+    step_size_0 = 0.00001
+    iterations_with_no_improvement = 0
+    min_v=None
+    min_value=float("inf")
+
+    while iterations_with_no_improvement < 100:
+        value = sum( f(v,x_i, y_i) for x_i, y_i in zip(x,y))
+        if value < min_value:
+            min_v, min_value = v, value
+            iterations_with_no_improvement = 0
+            step_size = step_size_0
+        else:
+            iterations_with_no_improvement += 1
+            step_size *= 0.9
+        indexes = numpy.random.permutation(len(x))
+        for i in indexes:
+            x_i = x[i]
+            y_i = y[i]
+            gradient_i = estimate_gradient_s(f,v,x_i,y_i)
+            v = step(v,gradient_i, step_size)
+    return min_v
+	
