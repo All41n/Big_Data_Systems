@@ -188,3 +188,19 @@ def predict_y(x_i, beta):
 def error(v,x,y):
 	error = y-predict_y(v,x)
 	return error
+    
+def squared_error(v,x,y):
+	return error(v,x,y)**2
+
+def multiple_r_squared(v, x, y):
+    sum_of_squared_errors = sum(squared_error(v, x_i, y_i) for x_i, y_i in zip(x, y))
+    return 1.0 - sum_of_squared_errors / sum_of_squares(de_mean(y))	
+	
+def normal_cdf(x, mu=0, sigma=1):
+	return (1 + math.erf((x - mu) / math.sqrt(2) / sigma)) / 2
+
+def p_value(beta_hat_j, sigma_hat_j):
+    if beta_hat_j > 0:
+        return 2 * (1 - normal_cdf(beta_hat_j / sigma_hat_j))
+    else:
+        return 2 * normal_cdf(beta_hat_j / sigma_hat_j)
