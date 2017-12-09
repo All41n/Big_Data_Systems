@@ -245,4 +245,23 @@ def stochastic_descent(x,y,f =squared_error):
             gradient_i = estimate_gradient_s(f,v,x_i,y_i)
             v = step(v,gradient_i, step_size)
     return min_v
-	
+	# predictedMins=stochastic_descent(zippedLists,exam_grades,squared_error)
+# print("Predicted Mins: ",predictedMins)
+# print("r-squared", multiple_r_squared(predictedMins, zippedLists, exam_grades))
+# findingMean = bootstrap_statistic(unzippedLists,exam_grades,stochastic_descent,2)
+# bootstrap_standard_errors = [standard_deviation([avg[i] for avg in findingMean]) for i in range(len(estimate_v))]
+
+#Iterates throught the stochastic_descent function and prints out the p-value
+# for i in range(len(predictedMins)):
+	# print(i,"estimate_v",predictedMins[i],"p-value", p_value(estimate_v[i], bootstrap_standard_errors[i]))
+
+print("___________________________________________________________________________________________________________")
+pca =PCA(2)
+plot_data = pca.fit_transform(zippedLists2)
+PC = pca.components_
+PCEV=pca.explained_variance_
+PCEVR=pca.explained_variance_ratio_
+print("principal components are:", PC)
+print("variance explained by each PC is", PCEV)
+print("proportion of variance explained by each PC is", PCEVR)
+print("transformed data", plot_data)
