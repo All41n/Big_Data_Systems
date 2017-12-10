@@ -265,3 +265,18 @@ print("principal components are:", PC)
 print("variance explained by each PC is", PCEV)
 print("proportion of variance explained by each PC is", PCEVR)
 print("transformed data", plot_data)
+
+# Principal Component Analysis - Screeplot
+pca =PCA()
+plot_data = pca.fit_transform(zippedLists2)
+PC = pca.components_
+PCEV=pca.explained_variance_
+PCEVR=pca.explained_variance_ratio_
+x=[i+1 for i in range(len(PC))]
+plt.plot(x, PCEV)
+plt.xlabel('Principal Component')
+plt.ylabel('Variation Explained')
+plt.title('Scree-plot')
+plt.show()
+
+#print(plot_data)
