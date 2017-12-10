@@ -290,3 +290,35 @@ plt.ylabel("PCA 2")
 plt.show()
 cluster_assignment = KM.predict(zippedLists2)
 print("Cluster Assignement: ",cluster_assignment)
+
+def getColumn(M,j):
+    return [M_i[j] for M_i in M]
+
+#Creating 2 KMeans Cluster Model
+model2 = KMeans(n_clusters=2)
+model2.fit(zippedLists2)
+cluster_assignment2 = model2.predict(zippedLists2)#Extracts the predicted clusters for the [inputs] data set
+print("")
+print("Cluster Assignement: ",cluster_assignment2)
+
+#Cluster arrays that the data points will be assigned to
+cluster0 = []
+cluster1 = []
+
+#iterate through [cluster_assignment2]
+#Determining the cluster to which data point should be assigned
+for k in range(len(cluster_assignment2)):
+    #The Data points is assigned to a specific cluster list
+    if cluster_assignment2[k] == 0:
+        cluster0.append(zippedLists2[k])
+    if cluster_assignment2[k] == 1:
+        cluster1.append(zippedLists2[k])
+print("")     
+#print(cluster0)
+#print(cluster1)
+
+x_cluster0 = [getColumn(cluster0,0)] #For every position in the [cluster0] extract the 0 entry
+y_cluster0 = [getColumn(cluster0, 1)] #For every position in the [cluster1] extract the 1 entry
+print("")
+#print(x_cluster0)
+#print(y_cluster0)
