@@ -322,3 +322,34 @@ y_cluster0 = [getColumn(cluster0, 1)] #For every position in the [cluster1] extr
 print("")
 #print(x_cluster0)
 #print(y_cluster0)
+
+x_cluster1 = [getColumn(cluster1,0)] #For every position in the [cluster0] extract the 0 entry
+y_cluster1 = [getColumn(cluster1, 1)] #For every position in the [cluster1] extract the 1 entry
+print("")
+print(x_cluster1)
+print(y_cluster1)
+
+#Create a scatter plot of the 2 cluster lists
+plt.scatter(x = x_cluster0, y = y_cluster0, color = 'green')
+plt.scatter(x = x_cluster1, y = y_cluster1, color = 'red')
+plt.show()
+
+no_clusters = range(1,11)
+average_dist = []
+
+for k in no_clusters:
+    modelk = KMeans(k)
+    modelk.fit(zippedLists2)
+    cluster_assign = modelk.predict(zippedLists2)
+    #print(k,cluster_assign)
+    average_dist.append(sum(numpy.min(cdist(zippedLists2,modelk.cluster_centers_,'euclidean'),axis = 1)/ len(zippedLists2)))
+print(average_dist)
+print(model2)
+print(model2.cluster_centers_)
+# average_dist.append(sum(np.min(cdist(inputs,modelk.cluster_centers_,'euclidean')),axis = 1))
+
+#Elbow Plot
+plt.plot(no_clusters,average_dist)
+plt.xlabel("Number of Clusters")
+plt.ylabel("Average Distance")
+plt.show()
