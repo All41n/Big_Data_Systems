@@ -280,3 +280,13 @@ plt.title('Scree-plot')
 plt.show()
 
 #print(plot_data)
+
+
+KM = KMeans(2)
+KM.fit(zippedLists2)#Puts a KM model in the [input] dataset
+plt.scatter(x = plot_data[:, 0], y = plot_data[:,1], c = KM.labels_,)
+plt.xlabel("PCA 1")
+plt.ylabel("PCA 2")
+plt.show()
+cluster_assignment = KM.predict(zippedLists2)
+print("Cluster Assignement: ",cluster_assignment)
